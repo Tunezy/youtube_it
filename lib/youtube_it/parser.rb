@@ -353,23 +353,19 @@ class YouTubeIt
           total_result_count = feed.at_xpath("openSearch:totalResults").text.to_i
           offset             = feed.at_xpath("openSearch:startIndex").text.to_i
           max_result_count   = feed.at_xpath("openSearch:itemsPerPage").text.to_i
-
+          
+          subscriptions = []
           feed.css("entry").each do |entry|
-            videos << parse_entry(entry)
+            subscriptions << parse_entry(entry)
           end
+          YouTubeIt::Response::Results.new(
+            :feed_id            => feed_id || nil,
+            :updated_at         => updated_at || nil,
+            :total_result_count => total_result_count || nil,
+            :offset             => offset || nil,
+            :max_result_count   => max_result_count || nil,
+            :results            => subscriptions)          
         end
-
-        subscriptions = []
-        feed.css("entry").each do |entry|
-          subscriptions << parse_entry(entry)
-        end
-        YouTubeIt::Response::Results.new(
-          :feed_id            => feed_id || nil,
-          :updated_at         => updated_at || nil,
-          :total_result_count => total_result_count || nil,
-          :offset             => offset || nil,
-          :max_result_count   => max_result_count || nil,
-          :results            => subscriptions)
       end
 
       protected
