@@ -360,7 +360,9 @@ class YouTubeIt
       end
 
       def subscriptions(user)
-        subscription_url = "/feeds/api/users/%s/subscriptions?v=2" % (user ? user : "default")
+        max_results = opts[:per_page] || 50
+        start_index = ((opts[:page] || 1) -1) * max_results +1
+        subscription_url = "/feeds/api/users/%s/subscriptions?v=2&max-results=#{max_results}&start-index=#{start_index}" % (user ? user : "default")
         response         = yt_session.get(subscription_url)
 
         return YouTubeIt::Parser::SubscriptionFeedParser.new(response).parse
