@@ -361,7 +361,8 @@ class YouTubeIt
           :title        => entry.at("title").text,
           :id           => entry.at("id").text[/subscription([^<]+)/, 1].sub(':',''),
           :published    => entry.at("published") ? entry.at("published").text : nil,
-          :user_id      => entry.at("yt:userId") ? entry.at("yt:userId").text : nil
+          :user_id      => entry.at("yt:userId") ? entry.at("yt:userId").text : nil,
+          :raw => entry
         )
       end
     end
