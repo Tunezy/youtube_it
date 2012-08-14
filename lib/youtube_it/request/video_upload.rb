@@ -359,7 +359,7 @@ class YouTubeIt
         return {:code => response.status, :body => response.body}
       end
 
-      def subscriptions(user)
+      def subscriptions(user = nil, opts = {})
         max_results = opts[:per_page] || 50
         start_index = ((opts[:page] || 1) -1) * max_results +1
         subscription_url = "/feeds/api/users/%s/subscriptions?v=2&max-results=#{max_results}&start-index=#{start_index}" % (user ? user : "default")
