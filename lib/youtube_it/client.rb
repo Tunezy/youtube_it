@@ -218,8 +218,8 @@ class YouTubeIt
       client.unsubscribe_channel(subscription_id)
     end
     
-    def subscriptions(user_id = nil)
-      client.subscriptions(user_id)
+    def subscriptions(user_id = nil, options)
+      client.subscriptions(user_id, options)
     end
 
     def enable_http_debugging
