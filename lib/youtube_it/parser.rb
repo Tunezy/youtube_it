@@ -375,7 +375,7 @@ class YouTubeIt
           :title        => entry.at("title").text,
           :id           => entry.at("id").text[/subscription([^<]+)/, 1].sub(':',''),
           :published    => entry.at("published") ? entry.at("published").text : nil,
-          :channel_id   => entry.at("yt:channelId") ? entry.at("yt:channelId").text : nil,
+          :channel_id   => entry.at_xpath("yt:channelId") ? entry.at_xpath("yt:channelId").text : nil,
           :raw => entry
         )
       end
